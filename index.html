@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения, Мама — Особенный день</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        editorial: {
+                            cream: '#FAF5EE',
+                            sand: '#F2EAE0',
+                            charcoal: '#1C1917',
+                            muted: '#57534E',
+                            terracotta: '#C85A32',
+                            crimson: '#6E2438',
+                            amber: '#C48B3F',
+                            goldLight: '#E8C589',
+                            border: 'rgba(28, 25, 23, 0.12)'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['Manrope', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Manrope', sans-serif; background-color: #FAF5EE; color: #1C1917; overflow-x: hidden; }
+
+        .ambient-glow {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(200, 90, 50, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 88% 72%, rgba(196, 139, 63, 0.16) 0%, transparent 50%),
+                radial-gradient(circle at 50% 42%, rgba(110, 36, 56, 0.08) 0%, transparent 58%);
+            animation: ambientShift 16s ease-in-out infinite alternate;
+        }
+        @keyframes ambientShift {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.07) translate(-18px, 16px); }
+        }
+
+        .paper-texture {
+            position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .reveal-up {
+            opacity: 0; transform: translateY(32px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-up.delay-100 { transition-delay: 120ms; }
+        .reveal-up.delay-200 { transition-delay: 240ms; }
+        .reveal-up.delay-300 { transition-delay: 360ms; }
+
+        .photo-frame { overflow: hidden; position: relative; }
+        .photo-frame svg { display: block; width: 100%; height: 100%; transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        .photo-frame:hover svg { transform: scale(1.03); }
+
+        .hero-title { font-size: clamp(2.5rem, 6.2vw, 5rem); line-height: 1.1; }
+        .section-title { font-size: clamp(2rem, 4.2vw, 3.1rem); line-height: 1.15; }
+        .grad-text { padding-bottom: 0.12em; display: inline-block; }
+
+        .gold-rule { height: 1px; background: linear-gradient(90deg, transparent, #C48B3F, transparent); }
+
+        .steam { animation: steam 4s ease-in-out infinite; transform-origin: center bottom; }
+        .steam.s2 { animation-delay: 1.3s; }
+        .steam.s3 { animation-delay: 2.4s; }
+        @keyframes steam { 0%,100% { opacity: .25; transform: translateY(0); } 50% { opacity: .7; transform: translateY(-6px); } }
+        .flame { animation: flame 1.4s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center bottom; }
+        @keyframes flame { 0% { transform: scale(1, 1); } 100% { transform: scale(.88, 1.12); } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF5EE; }
+        ::-webkit-scrollbar-thumb { background: #D6CEC2; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C85A32; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-glow, .steam, .flame { animation: none; }
+            .reveal-up { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-editorial-terracotta selection:text-white relative">
+
+    <!-- Общие элементы для иллюстраций: цветок и лист -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="bloom" viewBox="-50 -50 100 100">
+                <g fill="currentColor" stroke="rgba(0,0,0,.14)" stroke-width="1">
+                    <ellipse cx="0" cy="-26" rx="17" ry="24"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(45)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(90)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(135)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(180)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(225)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(270)"/>
+                    <ellipse cx="0" cy="-26" rx="17" ry="24" transform="rotate(315)"/>
+                </g>
+                <g fill="#fff" opacity=".22">
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(22)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(67)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(112)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(157)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(202)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(247)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(292)"/>
+                    <ellipse cx="0" cy="-16" rx="11" ry="15" transform="rotate(337)"/>
+                </g>
+                <circle r="9" fill="#C48B3F" opacity=".85"/>
+                <circle r="4" fill="#E8C589"/>
+            </symbol>
+            <symbol id="leaf" viewBox="-20 -40 40 80">
+                <path d="M0 38 C-22 12 -20 -20 0 -38 C20 -20 22 12 0 38Z" fill="#6F8A5B"/>
+                <path d="M0 36 V-30" stroke="#4F6A40" stroke-width="1.5" fill="none"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="ambient-glow"></div>
+    <div class="paper-texture"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-editorial-cream/85 border-b border-editorial-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+            <a href="#hero" class="font-serif italic text-lg sm:text-2xl tracking-wide text-editorial-charcoal">Специальный выпуск</a>
+            <div class="flex items-center space-x-4 sm:space-x-8 text-[11px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] text-editorial-muted font-medium">
+                <a href="#hero" class="hover:text-editorial-terracotta transition-colors py-2">Титул</a>
+                <a href="#letter" class="hover:text-editorial-terracotta transition-colors py-2">Поздравление</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="hero" class="relative min-h-[94vh] flex items-center px-4 sm:px-6 pt-24 pb-16 sm:py-28 z-10">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+            <div class="lg:col-span-7 text-center lg:text-left">
+                <p class="reveal-up text-[11px] sm:text-xs uppercase tracking-[0.28em] text-editorial-terracotta font-semibold mb-4 sm:mb-6">
+                    В честь самой дорогой женщины
+                </p>
+
+                <h1 class="reveal-up delay-100 font-serif hero-title font-normal text-editorial-charcoal tracking-tight mb-6">
+                    С Днём Рождения,<br>
+                    <span class="grad-text italic font-medium bg-gradient-to-r from-editorial-terracotta via-editorial-crimson to-editorial-amber bg-clip-text text-transparent">любимая Мама!</span>
+                </h1>
+
+                <div class="reveal-up delay-200 w-24 gold-rule mx-auto lg:mx-0 mb-6"></div>
+
+                <p class="reveal-up delay-200 text-sm sm:text-base md:text-lg text-editorial-muted max-w-xl mx-auto lg:mx-0 font-light leading-relaxed mb-9 sm:mb-10">
+                    О мудрости, которая бережно направляет, о тепле, которое согревает на любом расстоянии, и о любви, с которой начинается всё самое светлое.
+                </p>
+
+                <div class="reveal-up delay-300 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                    <a href="#letter" class="w-full sm:w-auto group inline-flex items-center justify-center space-x-3 px-8 py-4 bg-gradient-to-r from-editorial-charcoal to-[#2E2623] hover:from-editorial-terracotta hover:to-editorial-crimson text-editorial-cream text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-500 shadow-lg shadow-editorial-charcoal/10">
+                        <span>Читать поздравление</span>
+                        <svg class="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Иллюстрация 1: букет -->
+            <div class="lg:col-span-5 reveal-up delay-200">
+                <div class="relative max-w-md mx-auto">
+                    <div class="absolute -inset-3 rounded-[2rem] bg-gradient-to-tr from-editorial-terracotta/25 via-editorial-amber/20 to-editorial-crimson/20 blur-xl pointer-events-none"></div>
+                    <div class="relative bg-[#FAF5EE]/95 p-3 sm:p-4 rounded-[1.75rem] border border-editorial-amber/35 shadow-[0_25px_60px_-15px_rgba(28,25,23,0.12)]">
+                        <div class="photo-frame rounded-[1.25rem] aspect-[4/5] bg-editorial-sand">
+                            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Иллюстрация букета пионов и роз">
+                                <defs>
+                                    <linearGradient id="bq-bg" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0" stop-color="#F8E9DA"/><stop offset="1" stop-color="#EBD3BC"/>
+                                    </linearGradient>
+                                    <linearGradient id="bq-wrap" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#F5E6D0"/><stop offset="1" stop-color="#D9B98E"/>
+                                    </linearGradient>
+                                    <radialGradient id="bq-glow" cx=".5" cy=".4" r=".6">
+                                        <stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                                    </radialGradient>
+                                </defs>
+                                <rect width="400" height="500" fill="url(#bq-bg)"/>
+                                <circle cx="200" cy="190" r="190" fill="url(#bq-glow)"/>
+                                <!-- стебли -->
+                                <g stroke="#5E7A4B" stroke-width="5" stroke-linecap="round" fill="none">
+                                    <path d="M200 330 L200 230"/><path d="M185 335 L130 215"/><path d="M215 335 L270 215"/>
+                                    <path d="M175 340 L95 260"/><path d="M225 340 L305 260"/>
+                                </g>
+                                <!-- листья -->
+                                <use href="#leaf" x="58" y="190" width="70" height="130" transform="rotate(-50 93 255)"/>
+                                <use href="#leaf" x="272" y="190" width="70" height="130" transform="rotate(50 307 255)"/>
+                                <use href="#leaf" x="165" y="95" width="70" height="120" transform="rotate(-8 200 155)"/>
+                                <!-- цветы -->
+                                <use href="#bloom" x="75" y="205" width="100" height="100" style="color:#E7A0A8"/>
+                                <use href="#bloom" x="225" y="205" width="100" height="100" style="color:#C85A32"/>
+                                <use href="#bloom" x="130" y="120" width="140" height="140" style="color:#F2B8BE"/>
+                                <use href="#bloom" x="55" y="140" width="85" height="85" style="color:#F6DCC8"/>
+                                <use href="#bloom" x="260" y="140" width="85" height="85" style="color:#B33A52"/>
+                                <use href="#bloom" x="155" y="195" width="90" height="90" style="color:#8E2C44"/>
+                                <!-- мелкие цветочки -->
+                                <g fill="#fff" opacity=".95">
+                                    <circle cx="120" cy="105" r="5"/><circle cx="285" cy="110" r="5"/><circle cx="330" cy="215" r="4"/><circle cx="68" cy="240" r="4"/><circle cx="205" cy="92" r="4"/>
+                                </g>
+                                <!-- упаковка -->
+                                <path d="M105 300 L295 300 L235 465 L165 465 Z" fill="url(#bq-wrap)" stroke="#B8935E" stroke-width="1.5"/>
+                                <path d="M105 300 L200 330 L295 300" fill="#EFD9B6" stroke="#B8935E" stroke-width="1.5"/>
+                                <path d="M150 330 L175 462 M250 330 L225 462 M200 330 L200 465" stroke="#C9A877" stroke-width="1" fill="none" opacity=".7"/>
+                                <!-- лента и бант -->
+                                <path d="M168 385 Q200 400 232 385 L229 405 Q200 420 171 405 Z" fill="#6E2438"/>
+                                <path d="M200 395 C165 365 150 410 185 408 Z" fill="#8E2C44"/>
+                                <path d="M200 395 C235 365 250 410 215 408 Z" fill="#8E2C44"/>
+                                <circle cx="200" cy="397" r="7" fill="#6E2438"/>
+                                <path d="M192 405 L178 445 M208 405 L222 445" stroke="#6E2438" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="pt-3.5 pb-1 px-2 flex items-center justify-between text-xs">
+                            <span class="font-serif italic text-base text-editorial-charcoal">Цветы для тебя</span>
+                            <span class="text-[10px] uppercase tracking-[0.22em] text-editorial-amber font-semibold">Особый день</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ПИСЬМО -->
+    <section id="letter" class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 z-10 pb-32">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal-up bg-[#FFFDF9]/95 backdrop-blur-sm border border-editorial-border rounded-3xl p-6 sm:p-12 md:p-16 shadow-[0_20px_60px_-15px_rgba(28,25,23,0.07)] relative overflow-hidden">
+                <div class="absolute top-4 left-4 sm:top-6 sm:left-6 w-5 h-5 sm:w-6 sm:h-6 border-t border-l border-editorial-amber/60"></div>
+                <div class="absolute top-4 right-4 sm:top-6 sm:right-6 w-5 h-5 sm:w-6 sm:h-6 border-t border-r border-editorial-amber/60"></div>
+                <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 w-5 h-5 sm:w-6 sm:h-6 border-b border-l border-editorial-amber/60"></div>
+                <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-5 h-5 sm:w-6 sm:h-6 border-b border-r border-editorial-amber/60"></div>
+
+                <div class="text-center mb-10 sm:mb-12">
+                    <span class="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-editorial-amber font-semibold">Главные слова</span>
+                    <h2 class="font-serif section-title text-editorial-charcoal mt-2 font-normal">Письмо с благодарностью</h2>
+                    <div class="w-20 gold-rule mx-auto mt-4"></div>
+                </div>
+
+                <div class="space-y-5 sm:space-y-6 text-editorial-charcoal/90 font-light text-[15px] sm:text-base md:text-lg leading-[1.85] sm:leading-[1.9] max-w-2xl mx-auto">
+                    <p class="first-letter:font-serif first-letter:text-4xl sm:first-letter:text-5xl first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:text-editorial-terracotta">
+                        Дорогая мама, с каждым годом начинаешь всё глубже понимать, сколько тихой силы, терпения и безусловной любви стоит за каждым твоим словом и поступком. Ты всегда умела создать пространство, где спокойно и светло, где тебя понимают с полуслова и принимают всем сердцем.
+                    </p>
+                    <p>
+                        Спасибо тебе за твою внутреннюю красоту, за достоинство, с которым ты встречаешь каждый новый день, и за редкий дар согревать всех вокруг своей заботой. Твоя доброта никогда не была громкой — она всегда была настоящей, мудрой и бесконечно ценной.
+                    </p>
+                    <p>
+                        В этот день хочется пожелать тебе прежде всего времени для самой себя — наполненного неспешными утренними ритуалами, вдохновением, радостными встречами и крепким здоровьем. Пусть жизнь балует тебя красивыми мгновениями так же щедро, как ты даришь тепло нам.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-4xl mx-auto my-12 sm:my-14">
+
+                    <!-- Иллюстрация 2: кофе и круассан -->
+                    <figure class="group bg-[#FAF5EE] p-3 rounded-2xl border border-editorial-border transition-all duration-500 hover:border-editorial-amber/60 hover:shadow-lg">
+                        <div class="photo-frame rounded-xl aspect-square bg-editorial-sand">
+                            <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Утренний кофе с круассаном">
+                                <defs>
+                                    <linearGradient id="cf-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6E6D2"/><stop offset="1" stop-color="#E7CDB0"/></linearGradient>
+                                    <linearGradient id="cf-cr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3A25A"/><stop offset="1" stop-color="#B8692E"/></linearGradient>
+                                </defs>
+                                <rect width="400" height="400" fill="url(#cf-bg)"/>
+                                <!-- окно-свет -->
+                                <rect x="270" y="-10" width="140" height="200" fill="#fff" opacity=".18" transform="rotate(12 340 90)"/>
+                                <!-- тарелка с круассаном -->
+                                <ellipse cx="135" cy="290" rx="115" ry="38" fill="#00000012"/>
+                                <ellipse cx="135" cy="280" rx="112" ry="36" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <ellipse cx="135" cy="278" rx="80" ry="24" fill="none" stroke="#EADFCF" stroke-width="2"/>
+                                <!-- круассан -->
+                                <g stroke="#8E4A1E" stroke-width="1.5">
+                                    <ellipse cx="62" cy="268" rx="20" ry="25" fill="url(#cf-cr)" transform="rotate(-25 62 268)"/>
+                                    <ellipse cx="90" cy="252" rx="26" ry="33" fill="url(#cf-cr)" transform="rotate(-12 90 252)"/>
+                                    <ellipse cx="130" cy="244" rx="30" ry="39" fill="url(#cf-cr)"/>
+                                    <ellipse cx="170" cy="252" rx="26" ry="33" fill="url(#cf-cr)" transform="rotate(12 170 252)"/>
+                                    <ellipse cx="198" cy="268" rx="20" ry="25" fill="url(#cf-cr)" transform="rotate(25 198 268)"/>
+                                </g>
+                                <g stroke="#8E4A1E" stroke-width="1.5" fill="none" opacity=".55">
+                                    <path d="M118 212 Q130 244 118 278"/><path d="M142 212 Q130 244 142 278"/>
+                                    <path d="M82 224 Q92 254 80 280"/><path d="M178 224 Q168 254 180 280"/>
+                                </g>
+                                <ellipse cx="122" cy="226" rx="10" ry="14" fill="#F4C98A" opacity=".6"/>
+                                <!-- блюдце и чашка -->
+                                <ellipse cx="295" cy="298" rx="82" ry="22" fill="#00000012"/>
+                                <ellipse cx="295" cy="290" rx="80" ry="22" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <path d="M240 215 H350 V250 C350 285 325 298 295 298 C265 298 240 285 240 250 Z" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <path d="M350 228 C378 226 380 262 348 262" fill="none" stroke="#E0D2BF" stroke-width="7" stroke-linecap="round"/>
+                                <ellipse cx="295" cy="217" rx="55" ry="10" fill="#6B3E26"/>
+                                <ellipse cx="295" cy="217" rx="42" ry="6" fill="#8A5636"/>
+                                <path d="M280 217 q15 -6 30 0 q-15 5 -30 0" fill="#F2DFC4"/>
+                                <path d="M262 245 Q295 262 328 245" fill="none" stroke="#C48B3F" stroke-width="2" opacity=".6"/>
+                                <!-- пар -->
+                                <g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round">
+                                    <path class="steam" d="M275 195 q-12 -20 0 -38 q12 -18 0 -38"/>
+                                    <path class="steam s2" d="M300 195 q-12 -20 0 -38 q12 -18 0 -38"/>
+                                    <path class="steam s3" d="M325 195 q-12 -20 0 -38 q12 -18 0 -38"/>
+                                </g>
+                                <!-- веточка -->
+                                <path d="M310 350 Q350 330 380 345" stroke="#6F8A5B" stroke-width="3" fill="none"/>
+                                <use href="#bloom" x="348" y="322" width="40" height="40" style="color:#E7A0A8"/>
+                            </svg>
+                        </div>
+                        <figcaption class="pt-3.5 pb-1 px-1 flex flex-col">
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-editorial-terracotta font-semibold mb-0.5">Гармония</span>
+                            <span class="font-serif italic text-lg text-editorial-charcoal leading-snug">Уют неспешного утра</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Иллюстрация 3: торт -->
+                    <figure class="group bg-[#FAF5EE] p-3 rounded-2xl border border-editorial-border transition-all duration-500 hover:border-editorial-amber/60 hover:shadow-lg">
+                        <div class="photo-frame rounded-xl aspect-square bg-editorial-sand">
+                            <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Праздничный торт с ягодами">
+                                <defs>
+                                    <linearGradient id="ck-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3DDE0"/><stop offset="1" stop-color="#EFD2C0"/></linearGradient>
+                                    <linearGradient id="ck-sp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8C48F"/><stop offset="1" stop-color="#C99A5C"/></linearGradient>
+                                    <radialGradient id="ck-berry" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#E0506C"/><stop offset="1" stop-color="#8E1F3A"/></radialGradient>
+                                </defs>
+                                <rect width="400" height="400" fill="url(#ck-bg)"/>
+                                <g fill="#fff" opacity=".5"><circle cx="60" cy="70" r="4"/><circle cx="340" cy="90" r="5"/><circle cx="90" cy="160" r="3"/><circle cx="330" cy="170" r="3"/><circle cx="45" cy="230" r="4"/></g>
+                                <!-- подставка -->
+                                <ellipse cx="200" cy="345" rx="150" ry="26" fill="#00000014"/>
+                                <ellipse cx="200" cy="335" rx="148" ry="24" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <rect x="188" y="338" width="24" height="28" fill="#F0E6D8"/>
+                                <!-- нижний ярус -->
+                                <path d="M80 270 V315 C80 335 320 335 320 315 V270 Z" fill="url(#ck-sp)"/>
+                                <path d="M80 285 H320 M80 300 H320" stroke="#FFF4E0" stroke-width="3" opacity=".6"/>
+                                <path d="M72 262 C72 250 328 250 328 262 V282 C328 296 300 280 280 292 C260 304 240 284 220 294 C200 304 180 284 160 294 C140 304 120 286 100 292 C84 296 72 288 72 282 Z" fill="#FFF8F0"/>
+                                <!-- верхний ярус -->
+                                <path d="M118 210 V262 C118 278 282 278 282 262 V210 Z" fill="url(#ck-sp)"/>
+                                <path d="M118 228 H282 M118 244 H282" stroke="#FFF4E0" stroke-width="3" opacity=".6"/>
+                                <path d="M110 204 C110 190 290 190 290 204 V222 C290 236 262 220 244 232 C226 244 210 224 196 234 C180 244 164 224 148 234 C130 244 110 230 110 222 Z" fill="#FFF8F0"/>
+                                <!-- ягоды -->
+                                <g>
+                                    <circle cx="150" cy="190" r="12" fill="url(#ck-berry)"/><circle cx="178" cy="182" r="11" fill="#5A2A6B"/><circle cx="206" cy="186" r="13" fill="url(#ck-berry)"/>
+                                    <circle cx="236" cy="184" r="11" fill="#5A2A6B"/><circle cx="262" cy="192" r="10" fill="url(#ck-berry)"/>
+                                    <circle cx="146" cy="186" r="3" fill="#fff" opacity=".6"/><circle cx="202" cy="181" r="3" fill="#fff" opacity=".6"/>
+                                    <circle cx="105" cy="258" r="11" fill="url(#ck-berry)"/><circle cx="130" cy="252" r="9" fill="#5A2A6B"/>
+                                    <circle cx="270" cy="254" r="9" fill="#5A2A6B"/><circle cx="296" cy="258" r="11" fill="url(#ck-berry)"/>
+                                </g>
+                                <!-- листики мяты -->
+                                <use href="#leaf" x="160" y="165" width="26" height="40" transform="rotate(-50 173 185)"/>
+                                <use href="#leaf" x="220" y="165" width="26" height="40" transform="rotate(50 233 185)"/>
+                                <!-- свечи -->
+                                <g>
+                                    <rect x="170" y="140" width="8" height="40" rx="2" fill="#F4C6CF"/><rect x="196" y="132" width="8" height="48" rx="2" fill="#E8C589"/><rect x="222" y="140" width="8" height="40" rx="2" fill="#F4C6CF"/>
+                                    <g stroke="#fff" stroke-width="2" opacity=".7"><path d="M170 152 l8 -5 M170 164 l8 -5 M196 146 l8 -5 M196 160 l8 -5 M222 152 l8 -5 M222 164 l8 -5"/></g>
+                                    <path class="flame" d="M174 138 C166 126 174 118 174 108 C183 118 182 130 174 138Z" fill="#F6B13C"/>
+                                    <path class="flame" d="M200 130 C192 118 200 110 200 100 C209 110 208 122 200 130Z" fill="#F6B13C"/>
+                                    <path class="flame" d="M226 138 C218 126 226 118 226 108 C235 118 234 130 226 138Z" fill="#F6B13C"/>
+                                    <g fill="#FFF0B0"><ellipse cx="174" cy="130" rx="2.5" ry="5"/><ellipse cx="200" cy="122" rx="2.5" ry="5"/><ellipse cx="226" cy="130" rx="2.5" ry="5"/></g>
+                                </g>
+                            </svg>
+                        </div>
+                        <figcaption class="pt-3.5 pb-1 px-1 flex flex-col">
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-editorial-crimson font-semibold mb-0.5">Радость</span>
+                            <span class="font-serif italic text-lg text-editorial-charcoal leading-snug">Сладкие мгновения праздника</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Иллюстрация 4: чаепитие -->
+                    <figure class="group bg-[#FAF5EE] p-3 rounded-2xl border border-editorial-border transition-all duration-500 hover:border-editorial-amber/60 hover:shadow-lg">
+                        <div class="photo-frame rounded-xl aspect-square bg-editorial-sand">
+                            <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Душевное чаепитие с книгой и цветами">
+                                <defs>
+                                    <linearGradient id="tp-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4E4C8"/><stop offset="1" stop-color="#E9D0A8"/></linearGradient>
+                                    <linearGradient id="tp-table" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B98355"/><stop offset="1" stop-color="#8F5E38"/></linearGradient>
+                                    <linearGradient id="tp-pot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E2C44"/><stop offset=".5" stop-color="#B34860"/><stop offset="1" stop-color="#6E2438"/></linearGradient>
+                                </defs>
+                                <rect width="400" height="400" fill="url(#tp-bg)"/>
+                                <!-- окно -->
+                                <rect x="40" y="30" width="140" height="170" rx="70" fill="#FFF8E8" stroke="#D9BE90" stroke-width="5"/>
+                                <path d="M110 30 V200 M40 115 H180" stroke="#D9BE90" stroke-width="3"/>
+                                <circle cx="110" cy="115" r="55" fill="#FFE9B8" opacity=".6"/>
+                                <!-- стол -->
+                                <rect x="0" y="270" width="400" height="130" fill="url(#tp-table)"/>
+                                <rect x="0" y="270" width="400" height="6" fill="#00000018"/>
+                                <!-- скатерть -->
+                                <path d="M20 290 H380 L395 400 H5 Z" fill="#FFFDF9" opacity=".92"/>
+                                <path d="M20 290 H380" stroke="#E0D2BF" stroke-width="2"/>
+                                <g fill="#C85A32" opacity=".25"><circle cx="60" cy="330" r="6"/><circle cx="140" cy="360" r="6"/><circle cx="240" cy="335" r="6"/><circle cx="330" cy="365" r="6"/></g>
+                                <!-- ваза с цветами -->
+                                <g stroke="#5E7A4B" stroke-width="4" stroke-linecap="round" fill="none"><path d="M318 255 L300 190"/><path d="M328 255 L338 180"/><path d="M338 255 L368 200"/></g>
+                                <use href="#bloom" x="272" y="162" width="56" height="56" style="color:#F2B8BE"/>
+                                <use href="#bloom" x="310" y="145" width="58" height="58" style="color:#C85A32"/>
+                                <use href="#bloom" x="342" y="176" width="50" height="50" style="color:#F6DCC8"/>
+                                <path d="M300 252 H348 L342 290 C340 298 308 298 306 290 Z" fill="#DDE7EA" stroke="#B9C9CE" stroke-width="2"/>
+                                <!-- книга -->
+                                <path d="M60 285 L195 285 L195 300 L60 300 Z" fill="#6E2438"/>
+                                <path d="M62 276 H193 V285 H62 Z" fill="#FFF4DC" stroke="#E0D2BF"/>
+                                <path d="M72 262 H182 V276 H72 Z" fill="#C48B3F"/>
+                                <path d="M72 262 H182 V276 H72 Z" fill="none" stroke="#8E5F1E"/>
+                                <!-- чайник -->
+                                <ellipse cx="210" cy="292" rx="60" ry="8" fill="#00000018"/>
+                                <path d="M162 250 C162 215 258 215 258 250 C258 282 242 290 210 290 C178 290 162 282 162 250Z" fill="url(#tp-pot)"/>
+                                <path d="M185 224 C190 210 230 210 235 224 Z" fill="#6E2438"/>
+                                <circle cx="210" cy="208" r="7" fill="#C48B3F"/>
+                                <path d="M258 245 C285 230 292 255 268 266" fill="none" stroke="#6E2438" stroke-width="7" stroke-linecap="round"/>
+                                <path d="M162 250 C140 250 136 232 124 226 C140 224 150 236 164 238" fill="#8E2C44"/>
+                                <path d="M168 254 H252" stroke="#E8C589" stroke-width="3"/>
+                                <path d="M175 236 q8 -10 20 -10" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".4"/>
+                                <!-- чашка -->
+                                <ellipse cx="120" cy="333" rx="52" ry="12" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <path d="M92 300 H148 V318 C148 332 134 336 120 336 C106 336 92 332 92 318 Z" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <path d="M148 306 C164 304 164 326 146 326" fill="none" stroke="#E0D2BF" stroke-width="5"/>
+                                <ellipse cx="120" cy="300" rx="28" ry="5" fill="#B5702E"/>
+                                <path class="steam" d="M112 292 q-8 -12 0 -22 q8 -10 0 -22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                                <path class="steam s2" d="M128 292 q-8 -12 0 -22 q8 -10 0 -22" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                                <!-- печенье -->
+                                <ellipse cx="250" cy="348" rx="40" ry="10" fill="#FFFDF9" stroke="#E0D2BF" stroke-width="2"/>
+                                <circle cx="238" cy="342" r="11" fill="#D7A465"/><circle cx="262" cy="342" r="11" fill="#C48B3F"/>
+                                <g fill="#6B3E26"><circle cx="234" cy="340" r="1.8"/><circle cx="241" cy="345" r="1.8"/><circle cx="259" cy="339" r="1.8"/><circle cx="266" cy="345" r="1.8"/></g>
+                            </svg>
+                        </div>
+                        <figcaption class="pt-3.5 pb-1 px-1 flex flex-col">
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-editorial-amber font-semibold mb-0.5">Теплота</span>
+                            <span class="font-serif italic text-lg text-editorial-charcoal leading-snug">Время для вдохновения</span>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="pt-6 sm:pt-8 border-t border-editorial-border max-w-2xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <p class="font-serif italic text-xl sm:text-2xl text-editorial-crimson">С бесконечной любовью и нежностью,</p>
+                        <p class="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-editorial-muted mt-1">Твоя семья</p>
+                    </div>
+                    <div class="font-serif italic text-2xl text-editorial-amber select-none">Всегда рядом</div>
+                </div>
+            </div>
+
+            <footer class="mt-14 text-center">
+                <p class="font-serif italic text-xl text-editorial-crimson">С Днём Рождения, Мама</p>
+                <p class="text-[10px] uppercase tracking-[0.25em] text-editorial-muted mt-1.5">Создано с любовью • 2026</p>
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.reveal-up');
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            items.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
